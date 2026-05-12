@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Gather
+Comment=Gather Desktop (Linux port)
+Exec=/opt/applications/gather/gather %U
+Icon=/opt/applications/gather/icon.png
+Type=Application
+Categories=Network;InstantMessaging;VideoConference;
+Terminal=false
+StartupNotify=true

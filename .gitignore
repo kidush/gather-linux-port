@@ -1,0 +1,10 @@
+build/
+node_modules/
+*.asar
+*.zip
+*.tar.gz
+electron/
+.DS_Store
+*.log
+*.pyc
+__pycache__/
