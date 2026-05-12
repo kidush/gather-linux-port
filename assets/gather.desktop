@@ -2,7 +2,7 @@
 Name=Gather
 Comment=Gather Desktop (Linux port)
 Exec=/opt/applications/gather/gather %U
-Icon=/opt/applications/gather/icon.png
+Icon=gather
 Type=Application
 Categories=Network;InstantMessaging;VideoConference;
 Terminal=false

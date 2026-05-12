@@ -32,14 +32,18 @@ cp -a "$ELECTRON_DIR"/* "$INSTALL_DIR/"
 cp "$REPO_ROOT/bin/gather-wrapper.sh" "$INSTALL_DIR/gather"
 chmod +x "$INSTALL_DIR/gather"
 
+# Install icon to FreeDesktop icon hierarchy
+ICON_DIR="$HOME/.local/share/icons/hicolor/1024x1024/apps"
+mkdir -p "$ICON_DIR"
+cp "$INSTALL_DIR/icon.png" "$ICON_DIR/gather.png"
+
 # Install user desktop entry
 DESKTOP_DIR="$HOME/.local/share/applications"
 mkdir -p "$DESKTOP_DIR"
 cp "$REPO_ROOT/assets/gather.desktop" "$DESKTOP_DIR/gather.desktop"
 
-# Update desktop entry paths to match install location
+# Update desktop entry executable path (icon is referenced by name)
 sed -i "s|Exec=.*|Exec=$INSTALL_DIR/gather %U|g" "$DESKTOP_DIR/gather.desktop"
-sed -i "s|Icon=.*|Icon=$INSTALL_DIR/icon.png|g" "$DESKTOP_DIR/gather.desktop"
 
 # Refresh desktop database if available
 if command -v update-desktop-database >/dev/null 2>&1; then
