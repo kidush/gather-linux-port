@@ -64,9 +64,11 @@ sudo apt install libgtk-3-0 libnss3 libxss1 libasound2 libxtst6
 
 ## Quick Start
 
-### 1. Obtain the macOS App
+### 1. Obtain the macOS App (optional — build script can auto-download)
 
-Download the official macOS `.app` bundle from the [gathertown/gather-town-desktop-releases](https://github.com/gathertown/gather-town-desktop-releases) repository. Place it at `~/Downloads/Gather.app` or set `GATHER_APP` to its path.
+The build script will **automatically download** the latest macOS release from [gathertown/gather-town-desktop-releases](https://github.com/gathertown/gather-town-desktop-releases) if `Gather.app` is not found.
+
+If you already have the `.app` bundle, place it at `~/Downloads/Gather.app` (or set `GATHER_APP` to its path) and the script will skip the download.
 
 ### 2. Build
 
@@ -74,10 +76,10 @@ Download the official macOS `.app` bundle from the [gathertown/gather-town-deskt
 git clone https://github.com/kidush/gather-linux-port.git
 cd gather-linux-port
 
-# Default: expects ~/Downloads/Gather.app
+# Auto-downloads the macOS app if not present
 ./scripts/build.sh
 
-# Or specify the path:
+# Or point to an existing copy:
 # GATHER_APP=/path/to/Gather.app ./scripts/build.sh
 ```
 

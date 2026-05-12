@@ -48,16 +48,26 @@ python3 -c "from PIL import Image" 2>/dev/null || {
     exit 1
 }
 
-# Verify Gather.app exists
+# --- Auto-download macOS app if not present ---
 if [ ! -d "$GATHER_APP" ]; then
-    echo "ERROR: Gather.app not found at $GATHER_APP"
+    echo "Gather.app not found at $GATHER_APP"
+    echo "Attempting to download latest macOS release from GitHub..."
     echo ""
-    echo "Please download the macOS Gather Desktop app from:"
-    echo "  https://github.com/gathertown/gather-town-desktop-releases"
-    echo ""
-    echo "Then set the path:"
-    echo "  GATHER_APP=/path/to/Gather.app ./scripts/build.sh"
-    exit 1
+    DOWNLOADED_APP=$(python3 "$SCRIPT_DIR/download-macos-app.py" ~/Downloads 2>&1)
+    if [ $? -eq 0 ]; then
+        GATHER_APP="$DOWNLOADED_APP"
+        echo "Using downloaded app: $GATHER_APP"
+        echo ""
+    else
+        echo "$DOWNLOADED_APP"
+        echo ""
+        echo "Please download the macOS Gather Desktop app manually from:"
+        echo "  https://github.com/gathertown/gather-town-desktop-releases"
+        echo ""
+        echo "Then set the path:"
+        echo "  GATHER_APP=/path/to/Gather.app ./scripts/build.sh"
+        exit 1
+    fi
 fi
 
 # --- Step 1: Extract app.asar from macOS bundle ---
